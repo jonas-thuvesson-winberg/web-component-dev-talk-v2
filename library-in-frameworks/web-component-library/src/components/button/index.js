@@ -8,7 +8,8 @@ class JLibButton extends HTMLElement {
     super();
     this.#shadowRoot = this.attachShadow({ mode: "open" });
     const templateRoot = document.createElement("template");
-    templateRoot.innerHTML = `<style>${styles.toString()}</style>${templateContent}`;
+    const x = templateContent;
+    templateRoot.innerHTML = `<style>${styles.toString()}</style>${x}`;
     this.#shadowRoot.appendChild(templateRoot.content.cloneNode(true));
   }
 
@@ -50,3 +51,5 @@ class JLibButton extends HTMLElement {
 }
 
 customElements.define("jlib-button", JLibButton);
+
+export default JLibButton;

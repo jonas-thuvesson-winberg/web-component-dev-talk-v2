@@ -3,24 +3,62 @@
   <head>
     <title>Web Components Dev Talk</title>
     <meta charset="UTF-8" />
+    <style>
+      html {
+        font-family: sans-serif;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :host .open-closed {
+        background-color: yellow;
+      }
+    </style>
   </head>
   <body>
-    <sb-hello-world><span slot="target">World</span></sb-hello-world>
-    <template id="hello-world-template">
+    <h2>Hello slots</h2>
+    <jtw-hello-slots><span slot="target">World</span></jtw-hello-slots>
+    <h2>Hello attributes</h2>
+    <jtw-hello-attributes target="World"></jtw-hello-attributes>
+    <h2>Open component</h2>
+    <jtw-open></jtw-open>
+    <h2>Closed component</h2>
+    <jtw-closed></jtw-closed>
+
+    <!-- templates -->
+    <template id="hello-slots-template">
       <style>
         .container {
           text-align: center;
           padding: 10px;
           margin: 10px;
           border: dashed black 2px;
-          font-family: sans-serif;
-          box-sizing: border-box;
         }
       </style>
       <div class="container">Hello, <slot name="target"></slot>!</div>
     </template>
 
+    <template id="hello-attributes-template">
+      <style>
+        .container {
+          text-align: center;
+          padding: 10px;
+          margin: 10px;
+          border: dashed black 2px;
+        }
+      </style>
+      <div class="container">Hello <span id="target"></span>!</div>
+    </template>
+
+    <template id="open-closed-template">
+      <div class="open-closed">open/closed</div>
+    </template>
+
     <!-- template needs to be defined before script is run -->
-    <script src="simple-example.js"></script>
+    <script src="hello-slots.js"></script>
+    <script src="hello-attributes.js"></script>
+    <script src="open-component.js"></script>
+    <script src="closed-component.js"></script>
   </body>
 </html>

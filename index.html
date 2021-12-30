@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <title>Web Components Dev Talk</title>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <sb-hello-world><span slot="target">World</span></sb-hello-world>
+    <template id="hello-world-template">
+      <style>
+        .container {
+          text-align: center;
+          padding: 10px;
+          margin: 10px;
+          border: dashed black 2px;
+          font-family: sans-serif;
+          box-sizing: border-box;
+        }
+      </style>
+      <div class="container">Hello, <slot name="target"></slot>!</div>
+    </template>
+
+    <!-- template needs to be defined before script is run -->
+    <script src="simple-example.js"></script>
+  </body>
+</html>

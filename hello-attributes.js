@@ -1,5 +1,7 @@
+componentTag = "jtw-hello-attributes";
+
 customElements.define(
-  "jtw-hello-attributes",
+  componentTag,
   class HelloAttributes extends HTMLElement {
     #shadowRoot;
     constructor() {
@@ -10,11 +12,11 @@ customElements.define(
     }
 
     connectedCallback() {
-      console.log("I'm connected! :)");
+      console.log(`${componentTag} connected! :)`);
     }
 
     disconnectedCallback() {
-      console.log("I'm disconnected! :(");
+      console.log(`${componentTag} disconnetcted! :(`);
     }
 
     attributeChangedCallback(name, oldValue, newValue) {

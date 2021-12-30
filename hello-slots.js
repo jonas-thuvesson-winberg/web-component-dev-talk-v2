@@ -1,5 +1,7 @@
+componentTag = "jtw-hello-slots"
+
 customElements.define(
-  "jtw-hello-slots",
+  componentTag,
   class HelloSlots extends HTMLElement {
     #shadowRoot;
     constructor() {
@@ -10,11 +12,11 @@ customElements.define(
     }
 
     connectedCallback() {
-      console.log("I'm connected! :)");
+      console.log(`${componentTag} connected! :)`);
     }
 
     disconnectedCallback() {
-      console.log("I'm disconnected! :(");
+      console.log(`${componentTag} disconnetcted! :(`);
     }
   }
 );

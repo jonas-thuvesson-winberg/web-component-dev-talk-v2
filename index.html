@@ -4,23 +4,44 @@
     <title>Web Components Dev Talk</title>
     <meta charset="UTF-8" />
     <style>
-      html {
+      html,
+      body {
         font-family: sans-serif;
         box-sizing: border-box;
         margin: 0;
         padding: 0;
       }
+
+      .custom-lib-component {
+        margin: 10px 0;
+      }
+
+      main {
+        margin: 10px;
+      }
+
     </style>
   </head>
   <body>
-    <h2>Hello slots</h2>
-    <jtw-hello-slots><span slot="target">World</span></jtw-hello-slots>
-    <h2>Hello attributes</h2>
-    <jtw-hello-attributes target="World"></jtw-hello-attributes>
-    <h2>Open component</h2>
-    <jtw-open></jtw-open>
-    <h2>Closed component</h2>
-    <jtw-closed></jtw-closed>
+    <main>
+      <h1>Custom components</h1>
+      <h2>Hello slots</h2>
+      <jtw-hello-slots><span slot="target">Silobreaker</span></jtw-hello-slots>
+      <h2>Hello attributes</h2>
+      <jtw-hello-attributes target="World"></jtw-hello-attributes>
+      <h2>Open component</h2>
+      <jtw-open></jtw-open>
+      <h2>Closed component</h2>
+      <jtw-closed></jtw-closed>
+      <h1>A custom library of components</h1>
+      <h2>Custom button</h2>
+      <jlib-button
+        class="custom-lib-component"
+        background-color="rgb(100, 74, 116)"
+        text="click me!"
+        click-callback="() => console.log('lol!')"
+      ></jlib-button>
+    </main>
 
     <!-- templates -->
     <template id="hello-slots-template">
@@ -28,11 +49,10 @@
         .container {
           text-align: center;
           padding: 10px;
-          margin: 10px;
           border: dashed black 2px;
         }
       </style>
-      <div class="container">Hello, <slot name="target"></slot>!</div>
+      <div class="container">Hello, <slot name="target"></slot> from a slot!</div>
     </template>
 
     <template id="hello-attributes-template">
@@ -40,11 +60,10 @@
         .container {
           text-align: center;
           padding: 10px;
-          margin: 10px;
           border: dashed black 2px;
         }
       </style>
-      <div class="container">Hello <span id="target"></span>!</div>
+      <div class="container">Hello, <span id="target"></span> from an attribute!</div>
     </template>
 
     <template id="open-closed-template">
@@ -52,31 +71,36 @@
     </template>
 
     <!-- template needs to be defined before script is run -->
+    <script>
+      let componentTag;
+    </script>
     <script src="hello-slots.js"></script>
     <script src="hello-attributes.js"></script>
     <script src="open-component.js"></script>
     <script src="closed-component.js"></script>
+    <script src="library-in-frameworks/web-component-library/dist/components.js"></script>
     <script>
       const open = document.querySelector("jtw-open");
       if (open.shadowRoot) {
-        const target = open.shadowRoot.querySelector(".open-closed");
-        target.style.backgroundColor = "pink";
-        target.style.border = "dashed black 2px";
-        target.style.padding = "10px";
-        target.innerHTML = target.innerHTML + ". OH NO! I've been manipulated!";
+        manipulateComponent(open);
       }
 
       const closed = document.querySelector("jtw-closed");
       if (closed.shadowRoot) {
-        const target = closed.shadowRoot.querySelector(".open-closed");
+        manipulateComponent(closed);
+      }
+
+      console.log("This is an open shadow DOM root: ", open.shadowRoot);
+      console.log("This is a closed shadow DOM root: ", closed.shadowRoot);
+
+      function manipulateComponent(componentElement) {
+        const target =
+          componentElement.shadowRoot.querySelector(".open-closed");
         target.style.backgroundColor = "pink";
         target.style.border = "dashed black 2px";
         target.style.padding = "10px";
         target.innerHTML = target.innerHTML + ". OH NO! I've been manipulated!";
       }
-
-      console.log("This is the open shadow DOM", open.shadowRoot);
-      console.log("This is the closed shadow DOM", closed.shadowRoot);
     </script>
   </body>
 </html>

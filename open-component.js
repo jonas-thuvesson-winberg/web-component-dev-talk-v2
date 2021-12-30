@@ -7,6 +7,7 @@ customElements.define(
         this.#shadowRoot = this.attachShadow({ mode: "open" });
         const t = document.getElementById("open-closed-template");
         this.#shadowRoot.appendChild(t.content.cloneNode(true)); // deep clone
+        this.#shadowRoot.getElementById("open-or-closed").innerHTML = "Open";
       }
     }
   );

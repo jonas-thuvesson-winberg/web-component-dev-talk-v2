@@ -10,10 +10,6 @@
         margin: 0;
         padding: 0;
       }
-
-      :host .open-closed {
-        background-color: yellow;
-      }
     </style>
   </head>
   <body>
@@ -52,7 +48,7 @@
     </template>
 
     <template id="open-closed-template">
-      <div class="open-closed">open/closed</div>
+      <div class="open-closed"><span id="open-or-closed"></span> component</div>
     </template>
 
     <!-- template needs to be defined before script is run -->
@@ -60,5 +56,27 @@
     <script src="hello-attributes.js"></script>
     <script src="open-component.js"></script>
     <script src="closed-component.js"></script>
+    <script>
+      const open = document.querySelector("jtw-open");
+      if (open.shadowRoot) {
+        const target = open.shadowRoot.querySelector(".open-closed");
+        target.style.backgroundColor = "pink";
+        target.style.border = "dashed black 2px";
+        target.style.padding = "10px";
+        target.innerHTML = target.innerHTML + ". OH NO! I've been manipulated!";
+      }
+
+      const closed = document.querySelector("jtw-closed");
+      if (closed.shadowRoot) {
+        const target = closed.shadowRoot.querySelector(".open-closed");
+        target.style.backgroundColor = "pink";
+        target.style.border = "dashed black 2px";
+        target.style.padding = "10px";
+        target.innerHTML = target.innerHTML + ". OH NO! I've been manipulated!";
+      }
+
+      console.log("This is the open shadow DOM", open.shadowRoot);
+      console.log("This is the closed shadow DOM", closed.shadowRoot);
+    </script>
   </body>
 </html>

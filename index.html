@@ -19,7 +19,6 @@
       main {
         margin: 10px;
       }
-
     </style>
   </head>
   <body>
@@ -35,11 +34,12 @@
       <jtw-closed></jtw-closed>
       <h1>A custom library of components</h1>
       <h2>Custom button</h2>
+
       <jlib-button
-        class="custom-lib-component"
-        background-color="rgb(100, 74, 116)"
-        text="click me!"
-        click-callback="() => console.log('lol!')"
+        id="the-button"
+        background-color="red"
+        text="blow up the world"
+        tag="blowup"
       ></jlib-button>
     </main>
 
@@ -52,7 +52,9 @@
           border: dashed black 2px;
         }
       </style>
-      <div class="container">Hello, <slot name="target"></slot> from a slot!</div>
+      <div class="container">
+        Hello, <slot name="target"></slot> from a slot!
+      </div>
     </template>
 
     <template id="hello-attributes-template">
@@ -63,7 +65,9 @@
           border: dashed black 2px;
         }
       </style>
-      <div class="container">Hello, <span id="target"></span> from an attribute!</div>
+      <div class="container">
+        Hello, <span id="target"></span> from an attribute!
+      </div>
     </template>
 
     <template id="open-closed-template">
@@ -101,6 +105,12 @@
         target.style.padding = "10px";
         target.innerHTML = target.innerHTML + ". OH NO! I've been manipulated!";
       }
+
+      document
+        .getElementById("the-button")
+        .addEventListener("jlib-blowup-button-clicked", () =>
+          confirm("Are you really sure?")
+        );
     </script>
   </body>
 </html>

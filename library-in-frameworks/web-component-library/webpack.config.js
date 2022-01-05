@@ -1,6 +1,7 @@
 const path = require("path");
 
 module.exports = {
+  mode: "production",
   entry: "./src/components.js",
   output: {
     filename: "components.js",

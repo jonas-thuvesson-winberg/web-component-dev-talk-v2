@@ -3,10 +3,9 @@ import styles from "./index.css";
 
 class JLibButton extends HTMLElement {
   #shadowRoot;
-  #clickHandlerAdded = false;
   constructor() {
     super();
-    this.#shadowRoot = this.attachShadow({ mode: "open" });
+    this.#shadowRoot = this.attachShadow({ mode: "closed" });
     const templateRoot = document.createElement("template");
     const x = templateContent;
     templateRoot.innerHTML = `<style>${styles.toString()}</style>${x}`;
@@ -23,30 +22,32 @@ class JLibButton extends HTMLElement {
         this.#shadowRoot.getElementById("jlib-button").style.backgroundColor =
           newValue;
         break;
-      case "click-callback":
-        this.#shadowRoot
-          .getElementById("jlib-button")
-          .addEventListener("click", eval(newValue));
-        this.#clickHandlerAdded = true;
+      case "tag":
+        this.#setUpEmitter(newValue);
         break;
     }
   }
 
   static get observedAttributes() {
-    return ["text", "background-color", "click-callback"];
-  }
-
-  connectedCallback() {
-    if (!this.#clickHandlerAdded)
-      this.#shadowRoot
-        .getElementById("jlib-button")
-        .addEventListener("click", () => {
-          console.log("click!");
-        });
+    return ["text", "background-color", "tag"];
   }
 
   disconnectedCallback() {
     this.#shadowRoot.getElementById("jlib-button").removeEventListener("click");
+  }
+
+  #setUpEmitter(tag) {
+    this.#shadowRoot
+      .getElementById("jlib-button")
+      .addEventListener("click", () => {
+        console.log("click!");
+        this.dispatchEvent(
+          new CustomEvent(`jlib-${tag}-button-clicked`, {
+            bubbles: true,
+            composed: true,
+          })
+        );
+      });
   }
 }
 

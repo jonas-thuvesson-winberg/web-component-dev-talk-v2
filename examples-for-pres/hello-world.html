@@ -1,0 +1,14 @@
+<template id="hello-world-template">
+  <style>
+    .container {
+      text-align: center;
+      padding: 10px;
+      border: dashed black 2px;
+    }
+  </style>
+  <div class="container">Hello, <slot name="target"></slot>!</div>
+</template>
+
+...
+
+<sb-hello-world><span slot="target">Silobreaker</span></sb-hello-world>

@@ -9,12 +9,12 @@ export class AppComponent {
   title = 'angular-with-web-components';
   counter = 0;
 
-  @HostListener('jlib-increase-button-clicked')
+  @HostListener('increase-clicked')
   onIncreaseClicked() {
     this.counter++;
   }
 
-  @HostListener('jlib-decrease-button-clicked')
+  @HostListener('decrease-clicked')
   onDecreaseClicked() {
     this.counter--;
   }

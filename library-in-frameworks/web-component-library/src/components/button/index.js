@@ -42,7 +42,7 @@ class JLibButton extends HTMLElement {
       .addEventListener("click", () => {
         console.log("click!");
         this.dispatchEvent(
-          new CustomEvent(`jlib-${tag}-button-clicked`, {
+          new CustomEvent(`${tag}-clicked`, {
             bubbles: true,
             composed: true,
           })
